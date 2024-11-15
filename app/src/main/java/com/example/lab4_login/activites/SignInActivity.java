@@ -32,6 +32,9 @@ public class SignInActivity extends AppCompatActivity {
         setListeners();
     }
 
+    /**
+     * method with the on click listeners for the sign in button and create account text
+     */
     private void setListeners() {
         binding.textCreateNewAccount.setOnClickListener(v -> startActivity(new Intent(getApplicationContext(),SignUpActivity.class)));
 
@@ -43,10 +46,18 @@ public class SignInActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     * Method to display a message as a Toast message
+     * @param message the message displayed on the Toast popup
+     */
     private void showToast(String message){
         Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT).show();
     }
 
+    /**
+     * Method that reads from the Firestore Database to authenticate logins
+     */
     private void SignIn() {
         loading(true);
         FirebaseFirestore database = FirebaseFirestore.getInstance();
@@ -73,7 +84,10 @@ public class SignInActivity extends AppCompatActivity {
     }
 
 
-
+    /**
+     * A method that returns a boolean value depending on the information that is typed into the sign in boxes
+     * @return returns true if all values are valid, false if there is an error with the info in the boxes
+     */
     private boolean isValidSignIn() {
         if(binding.inputEmail.getText().toString().isEmpty()){
             showToast("Please enter your Email");
@@ -89,6 +103,10 @@ public class SignInActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Method to change the button to the loading icon and back to the button
+     * @param isLoading Boolean value that is either true - for loading or false - for not loading
+     */
     private void loading(Boolean isLoading){
         if(isLoading){
             binding.buttonSignIn.setVisibility(View.INVISIBLE);

@@ -49,6 +49,10 @@ public class SignUpActivity extends AppCompatActivity {
         setListeners();
     }
 
+    /**
+     * Methood to set the listeners for the sign up button
+     * and the sign in text
+     */
     private void setListeners() {
 
         binding.textSignIn.setOnClickListener(v -> onBackPressed());
@@ -67,11 +71,17 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
 
-
-
+    /**
+     * Method to display a Toast message
+     * @param message The message displayed in the Toast Popup
+     */
     private void showToast(String message){
         Toast.makeText(getApplicationContext(), message,Toast.LENGTH_SHORT).show();
     }
+
+    /**
+     * Method to store the login information into the Firebase Storage
+     */
     private void SignUp(){
         //check loading
         loading(true);
@@ -102,13 +112,14 @@ public class SignUpActivity extends AppCompatActivity {
                     showToast(exception.getMessage());
 
                 });
-
-
-
-
-        //Post to Firebase
         
     }
+
+    /**
+     * Method to store the profile image as a bitmap for the database
+     * @param bitmap the BitMap that will contain the image
+     * @return A string value that is the Image profile encoded
+     */
     private String encodeImage(Bitmap bitmap){
         int previewWidth = 150;
         int previewHeight = bitmap.getHeight()*previewWidth/bitmap.getWidth();
@@ -122,6 +133,7 @@ public class SignUpActivity extends AppCompatActivity {
         return Base64.encodeToString(bytes,Base64.DEFAULT);
     }
 
+    //changes the add image button into the image
     private final ActivityResultLauncher<Intent> pickImage = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             result ->{
@@ -140,6 +152,11 @@ public class SignUpActivity extends AppCompatActivity {
                 }
             }
     );
+
+    /**
+     * Method to check if all of the boxes have valid information
+     * @return Returns true if all boxes are valid, false if there is an error in a box
+     */
     private Boolean isValidSignUp(){
         if(binding.inputName.getText().toString().isEmpty()){
             showToast("Please enter your Name");
@@ -167,6 +184,11 @@ public class SignUpActivity extends AppCompatActivity {
         }
     }
 
+
+    /**
+     * Method to change the button to the loading icon and back to the button
+     * @param isLoading Boolean value that is either true - for loading or false - for not loading
+     */
     private void loading(Boolean isLoading){
         if(isLoading){
             binding.buttonSignUp.setVisibility(View.INVISIBLE);
