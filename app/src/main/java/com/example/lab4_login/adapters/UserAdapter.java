@@ -3,6 +3,7 @@ package com.example.lab4_login.adapters;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -55,8 +56,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.UserViewHolder
             binding.textEmail.setText(user.email);
             binding.imageProfile.setImageBitmap(getUserImage(user.image));
 
-
             binding.getRoot().setOnClickListener(v -> userListener.OnUserClicked(user));
+
 
         }
     }
