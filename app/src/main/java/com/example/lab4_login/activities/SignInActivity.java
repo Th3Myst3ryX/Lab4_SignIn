@@ -1,4 +1,4 @@
-package com.example.lab4_login.activites;
+package com.example.lab4_login.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,11 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.lab4_login.databinding.ActivitySignInBinding;
 import com.example.lab4_login.utilities.Constants;
 import com.example.lab4_login.utilities.PreferenceManager;
-import com.google.firebase.Firebase;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.util.HashMap;
 
 public class SignInActivity extends AppCompatActivity {
 
@@ -74,6 +71,10 @@ public class SignInActivity extends AppCompatActivity {
                        preferenceManager.putString(Constants.KEY_USER_ID,documentSnapshot.getId());
                        preferenceManager.putString(Constants.KEY_NAME,documentSnapshot.getString(Constants.KEY_NAME));
                        preferenceManager.putString(Constants.KEY_IMAGE,documentSnapshot.getString(Constants.KEY_IMAGE));
+
+                       Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                       intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                       startActivity(intent);
 
                        showToast("Successful Login");
                    }else{
